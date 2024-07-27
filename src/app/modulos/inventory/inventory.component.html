@@ -1,0 +1,69 @@
+<div class="bg-image h-100">
+    <div class="mask d-flex align-items-center h-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="card shadow-2-strong" style="background-color: #f5f7fa;">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-end mb-3">
+                                <button type="button" class="btn btn-update" (click)="addItem()">Agregar</button>
+                            </div>
+                            <div class="table-responsive d-flex justify-content-center">
+                                <table class="table table-borderless mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">CANTIDAD</th>
+                                            <th scope="col">FECHA</th>
+                                            <th scope="col">NOMBRE PRODUCTO</th>
+                                            <th scope="col">ACCIONES</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for(inventory of inventories; track inventory.id){
+                                        <tr>
+                                            <td>{{inventory.id}}</td>
+                                            <td class="{{id===inventory.id?'editando':'NoEditando'}}"
+                                                [attr.contenteditable]="[id == inventory.id]"
+                                                (blur)="updateField($event, inventory, 'quantity')"
+                                                [innerText]="inventory.quantity">
+                                                {{inventory.quantity}}
+                                            </td>
+                                            <td class="{{id===inventory.id?'editando':'NoEditando'}}"
+                                                [attr.contenteditable]="[id == inventory.id]"
+                                                (blur)="updateField($event, inventory, 'date')"
+                                                [innerText]="inventory.date">
+                                                {{inventory.date}}
+                                            </td>
+                                            <td class="{{id===inventory.id?'editando':'NoEditando'}}"
+                                                [attr.contenteditable]="[id == inventory.id]"
+                                                (blur)="updateField($event, inventory, 'id')">
+                                                @if(id == inventory.id){
+                                                <select>
+                                                    @for(product of products; track product.id){
+                                                    <option>{{product.name}}</option>
+                                                    }
+                                                </select>
+                                                }
+                                                @else{
+                                                {{inventory.product.name}}
+                                                }
+                                            </td>
+                                            <td class=" actions">
+                                                <button type="button" class="btn btn-update"
+                                                    (click)="OK(inventory)">{{id===inventory.id?'Guardar':'Editar'}}</button>
+                                                <button type="button" class="btn btn-delete"
+                                                    (click)="KO(inventory.id)">{{id===inventory.id?'Cancelar':'Eliminar'}}</button>
+                                            </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

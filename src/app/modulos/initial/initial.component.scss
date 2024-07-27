@@ -1,0 +1,16 @@
+.container {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: calc(100vh - 5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image {
+    max-width: 100%;
+    height: auto;
+}

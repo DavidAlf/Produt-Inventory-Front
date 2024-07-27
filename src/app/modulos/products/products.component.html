@@ -1,0 +1,77 @@
+<div class="bg-image h-100">
+    <div class="mask d-flex align-items-center h-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="card shadow-2-strong" style="background-color: #f5f7fa;">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-end mb-3">
+                                <button type="button" class="btn btn-update" (click)="addItem()">Agregar</button>
+                            </div>
+                            <div class="table-responsive d-flex justify-content-center">
+                                <table class="table table-borderless mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">ID</th>
+                                            <th scope="col">PRODUCTO</th>
+                                            <th scope="col">DESCRIPCION</th>
+                                            <th scope="col">PRECIO</th>
+                                            <th scope="col">CATEGORIA</th>
+                                            <th scope="col">ACCIONES</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for(product of products; track product.id){
+                                        <tr>
+                                            <td>{{product.id}}</td>
+                                            <td class="{{id===product.id?'editando':'NoEditando'}}"
+                                                [attr.contenteditable]="[id == product.id]"
+                                                (blur)="updateField($event, product, 'name')"
+                                                [innerText]="product.name">
+                                                {{product.name}}
+                                            </td>
+                                            <td class="{{id===product.id?'editando':'NoEditando'}}"
+                                                [attr.contenteditable]="[id == product.id]"
+                                                (blur)="updateField($event, product, 'description')"
+                                                [innerText]="product.description">
+                                                {{product.description}}
+                                            </td>
+                                            <td class="{{id===product.id?'editando':'NoEditando'}}"
+                                                [attr.contenteditable]="[id == product.id]"
+                                                (blur)="updateField($event, product, 'price')"
+                                                [innerText]="product.price">
+                                                {{product.price}}
+                                            </td>
+                                            <td class="{{id===product.id?'editando':'NoEditando'}}"
+                                                [attr.contenteditable]="[id == product.id]"
+                                                (blur)="updateField($event, product, 'name')"
+                                                >
+                                                @if(id == product.id){
+                                                <select>
+                                                    @for(category of categories; track category.id){                                                    
+                                                    <option>{{category.name}}</option>                                                    
+                                                    }
+                                                </select>
+                                                }
+                                                @else{
+                                                {{product.category.name}}
+                                                }
+                                            </td>
+                                            <td class=" actions">
+                                                <button type="button" class="btn btn-update"
+                                                    (click)="OK(product)">{{id===product.id?'Guardar':'Editar'}}</button>
+                                                <button type="button" class="btn btn-delete"
+                                                    (click)="KO(product.id)">{{id===product.id?'Cancelar':'Eliminar'}}</button>
+                                            </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
